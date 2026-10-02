@@ -1,0 +1,23 @@
+<?php
+
+$host = 'localhost';
+$port = '3306';
+$dbname = 'simulado_saep_02';
+$usuario = 'root';
+$senha = 'mysql';
+
+try{
+    $conn = new PDO("mysql:host=$host; port=$port; dbname=$dbname;charset=utf8mb4", $usuario, $senha);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+}catch(PDOException $e){
+    echo "Erro na conexão: " . $e->getMessage();
+}
+
+function verificarLogin(){
+    session_start();
+    if(!isset($_SESSION['usuario_id'])){
+        header('Location: login.php');
+        exit;
+    }
+}
